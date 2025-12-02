@@ -1,4 +1,4 @@
-/* 基本設定 */
+/* --- 基本設定 --- */
 body {
     font-family: 'Arial', sans-serif;
     display: flex;
@@ -12,19 +12,20 @@ body {
 
 #container {
     display: flex;
-    max-width: 1100px;
-    width: 95%;
+    max-width: 1200px; /* 限制大螢幕的最大寬度 */
+    width: 95%; /* 佔據視窗寬度的 95% */
     background: #fff;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     overflow: hidden;
+    flex-direction: row; /* 桌面預設為橫向排列 */
 }
 
 h1, h2 {
     color: #34495e;
 }
 
-/* 轉盤區 */
+/* --- 轉盤區 --- */
 #wheel-area {
     flex: 2;
     padding: 30px;
@@ -37,12 +38,17 @@ h1, h2 {
 
 #wheel-boundary {
     position: relative;
-    width: 500px;
-    height: 500px;
+    /* 響應式關鍵：使用 vmin 確保在小螢幕上縮放 */
+    width: 50vmin; 
+    height: 50vmin;
+    max-width: 500px; /* 限制最大尺寸 */
+    max-height: 500px;
     margin-bottom: 20px;
 }
 
 #wheel-canvas {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     /* 轉盤外觀效果 */
     box-shadow: 0 0 0 15px #f05e5e, 0 0 30px rgba(0, 0, 0, 0.2);
@@ -50,7 +56,7 @@ h1, h2 {
     transition: transform 6s cubic-bezier(0.2, 0.9, 0.2, 1); 
 }
 
-/* 指針樣式 - 朝內指向轉盤 */
+/* 指針樣式 - 朝內指向轉盤 (修正後) */
 #pointer {
     position: absolute;
     top: 0; /* 位於轉盤正上方 */
@@ -65,7 +71,7 @@ h1, h2 {
 }
 
 /* 按鈕樣式 */
-#spin-button {
+#spin-button, #add-option {
     padding: 12px 25px;
     font-size: 18px;
     font-weight: bold;
@@ -73,9 +79,12 @@ h1, h2 {
     border-radius: 8px;
     cursor: pointer;
     margin-top: 15px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#spin-button {
     background-color: #f05e5e; /* 主色調 */
     color: white;
-    transition: background-color 0.3s, transform 0.1s;
 }
 
 #spin-button:hover {
@@ -88,10 +97,10 @@ h1, h2 {
     margin-top: 20px;
     font-weight: bold;
     color: #2ecc71;
-    min-height: 30px; /* 避免內容跳動 */
+    min-height: 30px; 
 }
 
-/* 控制面板區 */
+/* --- 控制面板區 --- */
 #controls-area {
     flex: 1;
     padding: 30px;
@@ -149,4 +158,41 @@ h1, h2 {
 .note {
     font-size: 0.9em;
     color: #888;
+}
+
+/* --- RWD 媒體查詢 (Media Queries) --- */
+/* 當螢幕寬度小於或等於 768px 時，執行以下樣式（手機適配） */
+@media (max-width: 768px) {
+    #container {
+        /* 將橫向排列改為縱向堆疊 */
+        flex-direction: column; 
+        border-radius: 0; 
+    }
+
+    #wheel-area {
+        border-right: none;
+        border-bottom: 1px solid #eee; /* 在轉盤下方加一條分隔線 */
+        padding: 20px 10px;
+    }
+
+    #wheel-boundary {
+        /* 手機上轉盤佔據更多寬度 */
+        width: 80vw;
+        height: 80vw;
+        max-width: 400px;
+        max-height: 400px;
+    }
+
+    /* 調整手機上的文字大小 */
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+    
+    #controls-area {
+        padding: 20px;
+    }
 }
