@@ -6,7 +6,7 @@ const optionsListEl = document.getElementById('options-list');
 const addOptionBtn = document.getElementById('add-option');
 const presetSelect = document.getElementById('preset-select');
 
-// --- 預設選單定義 ---
+// --- 更新後的預設選單定義 ---
 const PRESET_OPTIONS = {
     'classic': [
         "炸雞", "雞排", "鐵板燒", "台式便當", "自助餐", 
@@ -39,7 +39,7 @@ const PRESET_OPTIONS = {
     'custom': [] 
 };
 
-// --- 核心變數 ---
+// --- 核心變數 (保持不變) ---
 let options = [...PRESET_OPTIONS.classic]; 
 const colors = [
     "#FF6B6B", "#4ECDC4", "#45B7D1", "#F7DC6F", "#A569BD", 
@@ -49,7 +49,7 @@ const colors = [
 let isSpinning = false;
 let customOptionsSnapshot = []; 
 
-// --------------------- A. 繪製邏輯 (修正對齊) ---------------------
+// --------------------- A. 繪製邏輯 (指針對齊修正) ---------------------
 
 function drawWheel() {
     const numOptions = options.length;
@@ -92,7 +92,7 @@ function drawWheel() {
 }
 
 
-// --------------------- B. 旋轉邏輯 (修正對齊) ---------------------
+// --------------------- B. 旋轉邏輯 (指針對齊修正) ---------------------
 
 spinBtn.addEventListener('click', () => {
     if (isSpinning) return;
@@ -141,7 +141,7 @@ spinBtn.addEventListener('click', () => {
 });
 
 
-// --------------------- C. 選項管理與選單切換 ---------------------
+// --------------------- C. 選項管理與選單切換 (保持不變) ---------------------
 
 function renderOptions() {
     optionsListEl.innerHTML = '';
@@ -205,8 +205,11 @@ presetSelect.addEventListener('change', (e) => {
 });
 
 
-// --------------------- D. 初始化 ---------------------
+// --------------------- D. 初始化 (保持不變) ---------------------
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 確保選單切換時能正確載入預設選項
+    const initialKey = presetSelect.value;
+    options = [...PRESET_OPTIONS[initialKey]]; 
     renderOptions();
 });
