@@ -1,0 +1,152 @@
+/* 基本設定 */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f7f6; /* 淺色背景 */
+    color: #333;
+}
+
+#container {
+    display: flex;
+    max-width: 1100px;
+    width: 95%;
+    background: #fff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+h1, h2 {
+    color: #34495e;
+}
+
+/* 轉盤區 */
+#wheel-area {
+    flex: 2;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #eee;
+}
+
+#wheel-boundary {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin-bottom: 20px;
+}
+
+#wheel-canvas {
+    border-radius: 50%;
+    /* 轉盤外觀效果 */
+    box-shadow: 0 0 0 15px #f05e5e, 0 0 30px rgba(0, 0, 0, 0.2);
+    /* 核心動畫設置 */
+    transition: transform 6s cubic-bezier(0.2, 0.9, 0.2, 1); 
+}
+
+/* 指針樣式 - 朝內指向轉盤 */
+#pointer {
+    position: absolute;
+    top: 0; /* 位於轉盤正上方 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 40px solid #f05e5e; /* 朝內指針 */
+    z-index: 10;
+}
+
+/* 按鈕樣式 */
+#spin-button {
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    background-color: #f05e5e; /* 主色調 */
+    color: white;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#spin-button:hover {
+    background-color: #d85454;
+    transform: scale(1.02);
+}
+
+#result {
+    font-size: 24px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #2ecc71;
+    min-height: 30px; /* 避免內容跳動 */
+}
+
+/* 控制面板區 */
+#controls-area {
+    flex: 1;
+    padding: 30px;
+    background-color: #fdfdfd;
+}
+
+#preset-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+#options-list {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-top: 15px;
+}
+
+.option-item {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.option-item input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.option-item input:focus {
+    border-color: #f05e5e;
+    outline: none;
+}
+
+.remove-btn {
+    margin-left: 5px;
+    padding: 8px 12px;
+    background-color: #bdc3c7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background-color: #e74c3c;
+}
+
+.note {
+    font-size: 0.9em;
+    color: #888;
+}

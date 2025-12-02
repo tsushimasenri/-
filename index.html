@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍽️ 美食命運轉盤</title>
+    <link rel="stylesheet" href="styles.css"> </head>
+<body>
+    <div id="container">
+        <div id="wheel-area">
+            <h1>今天吃什麼？</h1>
+            <div id="wheel-boundary">
+                <canvas id="wheel-canvas" width="500" height="500"></canvas>
+                <div id="pointer"></div> </div>
+            <button id="spin-button">給我轉！</button>
+            <div id="result">準備好了嗎？</div>
+        </div>
+
+        <div id="controls-area">
+            <h2>✨ 快速替換選單</h2>
+            <select id="preset-select">
+                <option value="custom">自定義選單</option>
+                <option value="classic" selected>經典台式美食 (預設)</option>
+                <option value="japanese">日式料理選單</option>
+                <option value="american">美式風味選單</option>
+                <option value="nightmarket">夜市小吃選單</option>
+                <option value="convenience">便利商店選單</option>
+                <option value="drinks">手搖飲大戰</option>
+                <option value="fastfood">速食連鎖店</option>
+            </select>
+            
+            <hr>
+            
+            <h2>✍️ 轉盤選項設定</h2>
+            <p class="note">點擊選項即可編輯內容，按 X 即可移除。</p>
+            <div id="options-list">
+                </div>
+            <button id="add-option">➕ 新增選項</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script> </body>
+</html>
