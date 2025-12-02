@@ -6,7 +6,7 @@ const optionsListEl = document.getElementById('options-list');
 const addOptionBtn = document.getElementById('add-option');
 const presetSelect = document.getElementById('preset-select');
 
-// --- 預設選單定義 (保持不變) ---
+// --- 預設選單定義 ---
 const PRESET_OPTIONS = {
     'classic': [
         "炸雞", "雞排", "珍奶", "台式便當", "自助餐", 
@@ -36,10 +36,10 @@ const PRESET_OPTIONS = {
         "麥當勞", "肯德基", "摩斯漢堡", "頂呱呱", "漢堡王", 
         "Subway", "吉野家", "丹丹漢堡", "拿坡里", "隨便！"
     ],
-    'custom': []
+    'custom': [] 
 };
 
-// --- 核心變數 (保持不變) ---
+// --- 核心變數 ---
 let options = [...PRESET_OPTIONS.classic]; 
 const colors = [
     "#FF6B6B", "#4ECDC4", "#45B7D1", "#F7DC6F", "#A569BD", 
@@ -49,7 +49,7 @@ const colors = [
 let isSpinning = false;
 let customOptionsSnapshot = []; 
 
-// --------------------- A. 繪製邏輯 (已修正) ---------------------
+// --------------------- A. 繪製邏輯 (已修正對齊) ---------------------
 
 function drawWheel() {
     const numOptions = options.length;
@@ -60,8 +60,7 @@ function drawWheel() {
     ctx.textAlign = 'right';
     ctx.font = '16px Arial';
 
-    // *** 核心修正：加入繪製偏移量，讓第一個選項的中心對準指針 (頂部) ***
-    // - Math.PI / 2 代表 -90 度 (從右側 0 度轉到頂部)
+    // 核心修正：加入繪製偏移量 (-Math.PI / 2 = -90度)，讓第一個扇形的中心對準指針 (頂部)
     const offset = -Math.PI / 2; 
 
     options.forEach((option, i) => {
@@ -93,7 +92,7 @@ function drawWheel() {
 }
 
 
-// --------------------- B. 旋轉邏輯 (不變，因為邏輯本身是對的) ---------------------
+// --------------------- B. 旋轉邏輯 (修正對齊) ---------------------
 
 spinBtn.addEventListener('click', () => {
     if (isSpinning) return;
@@ -108,11 +107,9 @@ spinBtn.addEventListener('click', () => {
 
     const numOptions = options.length;
     const arcSize = 360 / numOptions; 
-    const prizeIndex = Math.floor(Math.random() * numOptions); 
+    const prizeIndex = Math.floor(Math.random() * numOptions); // 隨機選中的選項索引
     
-    // 計算停止角度 (使指針指向選中扇形的中心)
-    // 停止角度：將選中項目的中心線轉到 0 度 (指針位置)
-    // 由於我們在繪製時已經將 0 度線轉到頂部，這裡的計算邏輯是正確的：
+    // 計算停止角度：將選中項目的中心線轉到 0 度 (指針位置)
     const stopAngle = 360 - (prizeIndex * arcSize + arcSize / 2); 
     
     // 總旋轉圈數
@@ -144,7 +141,7 @@ spinBtn.addEventListener('click', () => {
 });
 
 
-// --------------------- C. 選項管理與選單切換 (保持不變) ---------------------
+// --------------------- C. 選項管理與選單切換 ---------------------
 
 function renderOptions() {
     optionsListEl.innerHTML = '';
@@ -208,7 +205,7 @@ presetSelect.addEventListener('change', (e) => {
 });
 
 
-// --------------------- D. 初始化 (保持不變) ---------------------
+// --------------------- D. 初始化 ---------------------
 
 document.addEventListener('DOMContentLoaded', () => {
     renderOptions();
